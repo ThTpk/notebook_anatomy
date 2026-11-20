@@ -1,0 +1,6 @@
+# Review sheets from the screenshot loop — regenerate them, don't track them.
+# teardown-out/dist/notebook.html IS tracked: it is the page itself.
+teardown-out/*.png
+
+.DS_Store
+Thumbs.db
