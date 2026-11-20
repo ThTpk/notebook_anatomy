@@ -395,7 +395,9 @@ export function runLive() {
     for (const id of list) {
       const p = PART[id];
       if (!p) continue;
-      const w = Math.max(84, p.name.length * 6.6 + 10);
+      const sub = p.qty > 1 ? p.qty + ' x · ' + p.spec[0][1] : p.spec[0][1];
+      // the box has to hold the wider of the two lines, or the spec runs out under the side panel
+      const w = Math.max(84, p.name.length * 6.6 + 10, sub.length * 6.05 + 10);
       const a = st.project(nb.anchor(id));
       if (!a) continue;
       const flip = a[0] > 800; // the label goes into the margin opposite the part

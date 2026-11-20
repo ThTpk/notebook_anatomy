@@ -1,10 +1,14 @@
 # Notebook · Anatomy
 
+### ▶ เปิดดูเลย: **https://thtpk.github.io/notebook_anatomy/**
+
 เว็บ 3D แบบ interactive ที่อธิบายโครงสร้างภายในของคอมพิวเตอร์โน้ตบุ๊ก — หมุนดูได้ทุกมุม
 กดหยุดแล้วหมุนต่อได้ เลือกชิ้นส่วนขึ้นมาดูทีละชิ้นได้ และตัวเลขทุกตัวบนหน้าปัดมาจาก
 แบบจำลองความร้อนชุดเดียวกับที่ทำให้พัดลมในภาพหมุน
 
 สร้างด้วย skill `teardown` (three.js, หน้าเดียว ใช้งานออฟไลน์ได้ ~845 KB)
+
+![Notebook Anatomy](preview.png)
 
 ---
 
@@ -31,7 +35,8 @@ Framework Laptop 13 (13.5 นิ้ว อัตราส่วน 3:2) — เ�
 
 ## วิธีใช้
 
-เปิดไฟล์ `teardown-out/dist/notebook.html` ด้วยเบราว์เซอร์ได้เลย ไม่ต้องมีเซิร์ฟเวอร์
+เปิด https://thtpk.github.io/notebook_anatomy/ หรือจะโหลด `index.html` ไปเปิดจากเครื่องก็ได้
+เป็นไฟล์เดียวจบ ไม่ต้องมีเซิร์ฟเวอร์ ไม่ต้องต่อเน็ต
 
 | | |
 |---|---|
@@ -89,6 +94,10 @@ notebook/
   tour.js     มุมกล้อง 7 มุม และสคริปต์ทัวร์อัตโนมัติ
   live.js     ตัวขับหน้าเว็บ: ปุ่ม สไลเดอร์ orbit การคลิกเลือกชิ้นส่วน ระดับคุณภาพอัตโนมัติ
   main.js     จุดเริ่ม
+tools/
+  page.mjs    แปลงไฟล์ที่ build ออกมาให้เป็น index.html พร้อม title และ meta สำหรับการ์ดลิงก์
+index.html    หน้าที่ GitHub Pages เสิร์ฟ (ไฟล์ที่ build แล้ว — commit ขึ้นมาด้วย)
+preview.png   ภาพการ์ดลิงก์
 ```
 
 ### สั่ง build ใหม่
@@ -97,11 +106,18 @@ notebook/
 node "$HOME/.claude/skills/teardown/sims/build.mjs" ./notebook
 ```
 
-แล้วแก้ชื่อหน้าต่าง (build ตั้งชื่อตามชื่อโฟลเดอร์):
-
 ```bash
-sed -i 's|<title>notebook</title>|<title>Notebook Anatomy</title>|' teardown-out/dist/notebook.html
+node tools/page.mjs
 ```
+
+คำสั่งแรก build ไปที่ `teardown-out/dist/notebook.html` (โฟลเดอร์นี้อยู่ใน .gitignore)
+คำสั่งที่สองก๊อปมาเป็น `index.html` ที่รากโปรเจกต์พร้อมใส่ title กับ meta ให้ — ตัวนี้แหละที่ commit ขึ้น GitHub
+
+### GitHub Pages
+
+เสิร์ฟจาก branch `main` โฟลเดอร์ราก ตั้งค่าที่ **Settings → Pages → Source: Deploy from a branch → main / (root)**
+มี `.nojekyll` กันไม่ให้ Jekyll เข้ามายุ่งกับไฟล์ ถ้าแก้โค้ดแล้วอยากอัปเดตเว็บ ก็ build ใหม่ + `node tools/page.mjs`
+แล้ว commit `index.html` ขึ้นไป Pages จะ deploy ให้เองภายในไม่กี่นาที
 
 ### ถ่ายภาพไว้ตรวจงาน
 

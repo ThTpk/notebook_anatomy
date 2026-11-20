@@ -1,6 +1,6 @@
-# Review sheets from the screenshot loop — regenerate them, don't track them.
-# teardown-out/dist/notebook.html IS tracked: it is the page itself.
-teardown-out/*.png
+# Build output. The page GitHub Pages serves is index.html at the repo root,
+# made from this folder by tools/page.mjs.
+teardown-out/
 
 .DS_Store
 Thumbs.db
